@@ -1,0 +1,16 @@
+---
+- hosts: all
+  connection: ssh
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  vars_prompt:
+    - name: Packages
+      prompt: what package would you like me to install?
+      private: no
+  tasks:
+    - name: Install package
+      yum: 
+        name: "{{Packages}}"
+        state: installed
+
